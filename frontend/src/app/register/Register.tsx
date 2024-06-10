@@ -45,6 +45,7 @@ const RegisterComponent = ({ page }: any) => {
     },
     validationSchema,
     onSubmit: (values, action) => {
+      console.log("values", values);
       const userData = {
         ...values,
         username: values.firstName,

@@ -7,46 +7,52 @@ import {
   loginAccountSuccess,
 } from "@/redux/slices/auth.slice";
 
-import { AUTH_BASE_URL, AUTH_ENDPOINTS } from "@/redux/services/apiEndpoints";
+import { AUTH_ENDPOINTS } from "@/redux/services/apiEndpoints";
 import { ToastError, ToastSuccess } from "@/app/components/shared/Toasts";
+import { postFormData } from "../services/apiClients/postFormData";
 
 function* createAccountSaga(action: any) {
   const { userData, successCallback } = action.payload;
-  console.log("userData", userData);
-  try {
-    const res: AxiosResponse = yield axios.post(
-      AUTH_BASE_URL + "/auth/local/register",
-      userData
-    );
+  const credential: any = {
+    endpoint: AUTH_ENDPOINTS.register,
+    userData,
+  };
 
-    if (res) {
-      let data: any = res.data;
+  try {
+    const response: AxiosResponse = yield call(postFormData, credential);
+    console.log("response", response);
+    if (response) {
+      let data: any = response.data;
       localStorage.setItem("userinfo", JSON.stringify(data?.user));
       yield put(createAccountSuccess(data?.user));
       successCallback();
-      ToastSuccess("user-registered");
+      ToastSuccess(response.data);
+    } else {
+      ToastError(response);
     }
   } catch (err: any) {
-    ToastError(err.message);
+    ToastError(err);
     yield put(createAccountFailure(err));
   }
 }
 
 function* loginAccountSaga(action: any) {
-  let { userData, successCallback } = action.payload;
-  console.log("userData", userData);
-  try {
-    const res: AxiosResponse = yield axios.post(
-      AUTH_BASE_URL + AUTH_ENDPOINTS.login,
-      userData
-    );
+  const { userData, successCallback } = action.payload;
+  const credential: any = {
+    endpoint: AUTH_ENDPOINTS.login,
+    userData,
+  };
 
-    if (res) {
-      let data: any = res.data;
+  try {
+    const response: AxiosResponse = yield call(postFormData, credential);
+    console.log("response", response);
+    if (response) {
+      console.log("response", response);
+      let data: any = response.data;
       localStorage.setItem("userinfo", JSON.stringify(data?.user));
       yield put(loginAccountSuccess(data?.user));
       successCallback();
-      ToastSuccess("user-loggedin");
+      ToastSuccess(response.data);
     }
   } catch (err: any) {
     ToastError(err.message);

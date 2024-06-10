@@ -37,7 +37,7 @@ function LoginComponent() {
     validationSchema,
     onSubmit: (values, action) => {
       const userData = {
-        identifier: values.email,
+        email: values.email,
         password: values.password,
       };
       const obj = {
