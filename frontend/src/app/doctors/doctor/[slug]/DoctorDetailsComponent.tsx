@@ -51,7 +51,7 @@ const DoctorDetailsComponent = () => {
               </Stack>
 
               <Box mt={4}>
-                <Link href="/appointment">
+                <Link href={`/appointment`}>
                   <Button
                     disableRipple
                     size="large"

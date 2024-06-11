@@ -25,8 +25,6 @@ const userRegistration = async (req: Request, res: Response) => {
     res.status(201).send("User created successfully");
   } catch (error: any) {
     if (error.code === 11000) {
-      // Duplicate email error
-      // res.status(400).send("Email already exists");
       res.status(400).json({ message: "Email already exists" });
     } else {
       res.status(500).send("Internal server error");
