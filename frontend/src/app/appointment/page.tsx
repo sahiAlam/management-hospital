@@ -16,7 +16,7 @@ const page = () => {
 
   return (
     <>
-      <Box component="section" py={10}>
+      <Box component="section">
         <AppointmentComponent credential={credential} />
       </Box>
     </>

@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import { call, put, takeEvery } from "redux-saga/effects";
 import {
   createAccountFailure,
@@ -6,11 +6,14 @@ import {
   loginAccountFailure,
   loginAccountSuccess,
 } from "@/redux/slices/auth.slice";
-
 import { AUTH_ENDPOINTS } from "@/redux/services/apiEndpoints";
-import { ToastError, ToastSuccess } from "@/app/components/shared/Toasts";
-import { postFormData } from "../services/apiClients/postFormData";
+import { ToastError, ToastSuccess } from "@/app/components/Shared/Toasts";
+import {
+  registerHandlerClient,
+  loginHandlerClient,
+} from "../services/apiClients/authClientHandler";
 
+// Worker function for Registration
 function* createAccountSaga(action: any) {
   const { userData, successCallback } = action.payload;
   const credential: any = {
@@ -19,8 +22,10 @@ function* createAccountSaga(action: any) {
   };
 
   try {
-    const response: AxiosResponse = yield call(postFormData, credential);
-    console.log("response", response);
+    const response: AxiosResponse = yield call(
+      registerHandlerClient,
+      credential
+    );
     if (response) {
       let data: any = response.data;
       localStorage.setItem("userinfo", JSON.stringify(data?.user));
@@ -36,6 +41,7 @@ function* createAccountSaga(action: any) {
   }
 }
 
+// Worker function for Login
 function* loginAccountSaga(action: any) {
   const { userData, successCallback } = action.payload;
   const credential: any = {
@@ -44,15 +50,17 @@ function* loginAccountSaga(action: any) {
   };
 
   try {
-    const response: AxiosResponse = yield call(postFormData, credential);
-    console.log("response", response);
+    const response: AxiosResponse = yield call(loginHandlerClient, credential);
     if (response) {
-      console.log("response", response);
-      let data: any = response.data;
-      localStorage.setItem("userinfo", JSON.stringify(data?.user));
-      yield put(loginAccountSuccess(data?.user));
-      successCallback();
-      ToastSuccess(response.data);
+      localStorage.setItem("userInfo", JSON.stringify(response?.data));
+
+      yield put(loginAccountSuccess(response?.data));
+
+      // Call success callback if provided
+      if (successCallback) {
+        successCallback();
+      }
+      ToastSuccess(response?.data?.message);
     }
   } catch (err: any) {
     ToastError(err.message);
@@ -60,6 +68,7 @@ function* loginAccountSaga(action: any) {
   }
 }
 
+// Watcher Functions
 function* watchAuthSaga() {
   yield takeEvery("authSlice/createAccountStart", createAccountSaga);
   yield takeEvery("authSlice/loginAccountStart", loginAccountSaga);

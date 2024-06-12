@@ -5,6 +5,7 @@ import { InlineWidget, useCalendlyEventListener } from "react-calendly";
 import { formatTimestamp } from "../utils/formatTimestamp";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 interface CalendlyEmbedProps {
   url: string;
@@ -13,8 +14,7 @@ interface CalendlyEmbedProps {
 }
 const AppointmentComponent = ({ credential }: any) => {
   const router = useRouter();
-  const { currentDoctor } = useSelector((state: any) => state?.doctors);
-  console.log("currentDoc", currentDoctor);
+  const { currentDoctor } = useSelector((state: RootState) => state?.doctors);
 
   const fetchEventDetails = async (eventUri: any) => {
     const uuid = eventUri.split("/").pop();
@@ -25,7 +25,6 @@ const AppointmentComponent = ({ credential }: any) => {
           Authorization: `Bearer ${credential.token}`,
         },
       });
-      console.log("Event-details:", response.data);
       return response.data;
     } catch (error) {
       console.error("Error fetching event details:", error);
@@ -37,19 +36,20 @@ const AppointmentComponent = ({ credential }: any) => {
     onEventScheduled: async (e: any) => {
       const eventUri = e.data.payload.event.uri;
       const response = await fetchEventDetails(eventUri);
-      console.log("Event Scheduled:", response);
-      console.log(formatTimestamp(response?.resource.start_time));
 
       setTimeout(() => {
         router.push("/doctors");
-      }, 5000);
+      }, 3000);
     },
   });
 
   return (
     <>
       <Container maxWidth="lg">
-        <InlineWidget url={credential.calendlyUrl}></InlineWidget>
+        <InlineWidget
+          url={credential.calendlyUrl}
+          styles={{ height: "700px", width: "100%" }}
+        ></InlineWidget>
       </Container>
     </>
   );

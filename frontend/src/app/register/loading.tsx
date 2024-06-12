@@ -1,7 +1,6 @@
-// components/RegisterSkeleton.js
 import { Box, Container, Skeleton, Stack } from "@mui/material";
 
-const RegisterSkeleton = () => {
+const loading = () => {
   return (
     <Box component="section" py={8} bgcolor="#f9fdfd">
       <Container maxWidth="lg">
@@ -30,7 +29,7 @@ const RegisterSkeleton = () => {
                 <Stack width="48%">
                   <Skeleton variant="text" height={30} />
                   <Skeleton
-                    variant="rectangular"
+                    variant="rounded"
                     height={50}
                     sx={{ mt: 1, borderRadius: "8px" }}
                   />
@@ -38,7 +37,7 @@ const RegisterSkeleton = () => {
                 <Stack width="48%">
                   <Skeleton variant="text" height={30} />
                   <Skeleton
-                    variant="rectangular"
+                    variant="rounded"
                     height={50}
                     sx={{ mt: 1, borderRadius: "8px" }}
                   />
@@ -47,7 +46,7 @@ const RegisterSkeleton = () => {
               <Stack my={2}>
                 <Skeleton variant="text" height={30} />
                 <Skeleton
-                  variant="rectangular"
+                  variant="rounded"
                   height={50}
                   sx={{ mt: 1, borderRadius: "8px" }}
                 />
@@ -55,7 +54,7 @@ const RegisterSkeleton = () => {
               <Stack my={2}>
                 <Skeleton variant="text" height={30} />
                 <Skeleton
-                  variant="rectangular"
+                  variant="rounded"
                   height={50}
                   sx={{ mt: 1, borderRadius: "8px" }}
                 />
@@ -70,20 +69,14 @@ const RegisterSkeleton = () => {
                 />
               </Stack>
               <Skeleton
-                variant="rectangular"
+                variant="rounded"
                 height={50}
                 sx={{ borderRadius: "14px" }}
               />
-              <Stack my={2} direction={"row"} alignItems={"center"} gap={1}>
-                <Skeleton variant="text" width="40%" height={30} />
-                <Skeleton variant="text" width="40%" height={30} />
-              </Stack>
             </Box>
           </Box>
           <Box
             sx={{
-              width: "50%",
-              height: "100%",
               borderRadius: "0.4rem",
               display: {
                 sm: "none",
@@ -94,8 +87,8 @@ const RegisterSkeleton = () => {
             }}
           >
             <Skeleton
-              variant="rectangular"
-              width={450}
+              variant="rounded"
+              width={600}
               height={550}
               sx={{ margin: "0 auto" }}
             />
@@ -106,4 +99,4 @@ const RegisterSkeleton = () => {
   );
 };
 
-export default RegisterSkeleton;
+export default loading;

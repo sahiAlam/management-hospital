@@ -2,23 +2,26 @@ import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "@/redux/rootReducer";
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "@/redux/rootSaga";
-import { persistStore } from "redux-persist";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 
 const sagaMiddleware = createSagaMiddleware();
-// const persistConfig = {
-//   key: "root",
-//   storage: localStorage, // Use localStorage for persistence (can also use sessionStorage)
-// };
+const persistConfig = {
+  key: "root",
+  storage,
+};
 
-// const persistedReducer = persistReducer(peristConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat(sagaMiddleware),
 });
-// const persistor = persistStore(store);
+
 sagaMiddleware.run(rootSaga);
 
+export const persistor = persistStore(store);
 export default store;
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

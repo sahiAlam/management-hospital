@@ -4,7 +4,7 @@ import HomeComponent from "./HomeComponent";
 export default function Home() {
   return (
     <>
-      <Box component="section" py={8}>
+      <Box component="section">
         <HomeComponent />
       </Box>
     </>
