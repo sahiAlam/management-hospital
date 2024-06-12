@@ -15,9 +15,10 @@ import {
   Typography,
 } from "@mui/material";
 import Link from "next/link";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { useRouter } from "next/navigation";
+import { logoutAccount } from "@/redux/slices/auth.slice";
 
 const NavBar = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -25,7 +26,10 @@ const NavBar = () => {
   const user = localStorage.getItem("userInfo");
   const authInfo = useSelector((state: RootState) => state.auth.userInfo);
 
+  console.log("authInfo", authInfo);
+
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -38,6 +42,7 @@ const NavBar = () => {
   // Logout Handler
   const handleLogoutUser = () => {
     localStorage.removeItem("userInfo");
+    dispatch(logoutAccount());
     handleCloseUserMenu();
     router.push("/login");
   };
