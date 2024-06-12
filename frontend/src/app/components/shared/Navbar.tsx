@@ -66,7 +66,7 @@ const NavBar = () => {
                 alignItems: "center",
               }}
             >
-              CareConsult{"  "}
+              careConsult{"  "}
               <Box component="span" sx={{ color: "#54de54", fontSize: "40px" }}>
                 +
               </Box>
@@ -95,7 +95,7 @@ const NavBar = () => {
                 alignItems: "center",
               }}
             >
-              CareConsult{"  "}
+              careConsult{"  "}
               <Box component="span" sx={{ color: "#54de54", fontSize: "20px" }}>
                 +
               </Box>

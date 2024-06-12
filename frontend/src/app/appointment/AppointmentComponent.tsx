@@ -2,7 +2,7 @@
 import { Container } from "@mui/material";
 import axios from "axios";
 import { InlineWidget, useCalendlyEventListener } from "react-calendly";
-import { formatTimestamp } from "../utils/formatTimestamp";
+import { formatTimestamp } from "@/app/utils/formatTimestamp";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -15,6 +15,7 @@ interface CalendlyEmbedProps {
 const AppointmentComponent = ({ credential }: any) => {
   const router = useRouter();
   const { currentDoctor } = useSelector((state: RootState) => state?.doctors);
+  console.log("currentDoctor", currentDoctor);
 
   const fetchEventDetails = async (eventUri: any) => {
     const uuid = eventUri.split("/").pop();
