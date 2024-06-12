@@ -54,6 +54,12 @@ export const authSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+
+    // Logout
+    logoutAccount: (state) => {
+      state.userInfo = defaultUserInfo;
+      state.loading = false;
+    },
   },
 });
 
@@ -64,6 +70,7 @@ export const {
   loginAccountStart,
   loginAccountSuccess,
   loginAccountFailure,
+  logoutAccount,
 } = authSlice.actions;
 
 export default authSlice.reducer;

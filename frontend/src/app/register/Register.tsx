@@ -92,8 +92,9 @@ const RegisterComponent = ({ page }: any) => {
                 alignItems={"center"}
                 justifyContent={"space-between"}
                 my={2}
+                gap={3}
               >
-                <Stack>
+                <Stack width={"100%"}>
                   <Typography
                     my={1}
                     variant="h5"
@@ -129,7 +130,7 @@ const RegisterComponent = ({ page }: any) => {
                     </Typography>
                   )}
                 </Stack>
-                <Stack>
+                <Stack width={"100%"}>
                   <Typography
                     my={1}
                     variant="h5"
