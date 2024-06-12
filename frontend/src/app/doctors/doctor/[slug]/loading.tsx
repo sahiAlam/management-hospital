@@ -27,10 +27,10 @@ const loading = () => {
               <Skeleton variant="text" width={200} height={30} />
             </Box>
             <Box my={2}>
-              <Skeleton variant="rounded" width="100%" height={50} />
+              <Skeleton variant="rectangular" width="100%" height={50} />
             </Box>
             <Box my={2}>
-              <Skeleton variant="rounded" width="100%" height={50} />
+              <Skeleton variant="rectangular" width="100%" height={50} />
             </Box>
             <Box
               sx={{
@@ -45,6 +45,8 @@ const loading = () => {
           </Box>
           <Box
             sx={{
+              width: "50%",
+              height: "100%",
               borderRadius: "0.4rem",
               display: {
                 sm: "none",
@@ -55,8 +57,8 @@ const loading = () => {
             }}
           >
             <Skeleton
-              variant="rounded"
-              width={600}
+              variant="rectangular"
+              width={650}
               height={550}
               sx={{ margin: "0 auto" }}
             />

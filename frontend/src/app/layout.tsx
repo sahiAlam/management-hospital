@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import ReduxProvider from "@/redux/ReduxProvider";
 import { UiLayout } from "./UiLayout";
-import NavBar from "./components/shared/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,12 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className} style={{ background: "#fefefefd" }}>
+      <body className={inter.className} style={{ background: "#E2F5F5" }}>
         <UiLayout>
-          <ReduxProvider>
-            {/* <NavBar /> */}
-            {children}
-          </ReduxProvider>
+          <ReduxProvider>{children}</ReduxProvider>
         </UiLayout>
       </body>
     </html>

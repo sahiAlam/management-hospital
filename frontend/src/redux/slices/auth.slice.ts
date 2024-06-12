@@ -1,14 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export interface UserInfo {
+  email: string;
+  id: string;
+  token: string;
+}
+
 export interface AuthType {
   loading: boolean;
-  userInfo: {};
+  userInfo: UserInfo;
   error: Error | null;
 }
 
+// Default UserInfo
+const defaultUserInfo: UserInfo = {
+  email: "",
+  id: "",
+  token: "",
+};
+
 const initialState: AuthType = {
   loading: false,
-  userInfo: {},
+  userInfo: defaultUserInfo,
   error: null,
 };
 
@@ -16,6 +29,7 @@ export const authSlice = createSlice({
   name: "authSlice",
   initialState,
   reducers: {
+    // Registration
     createAccountStart: (state, action) => {
       state.loading = true;
     },
@@ -28,6 +42,7 @@ export const authSlice = createSlice({
       state.loading = false;
     },
 
+    // Login
     loginAccountStart: (state, action) => {
       state.loading = true;
     },

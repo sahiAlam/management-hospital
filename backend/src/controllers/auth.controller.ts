@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import User from "../models/auth.model";
+import generateToken from "../config/generateToken";
 
 const getHomeRoute = (req: Request, res: Response) => {
   res.send("Api Nicely Working");
@@ -8,7 +9,6 @@ const getHomeRoute = (req: Request, res: Response) => {
 // Registration User
 const userRegistration = async (req: Request, res: Response) => {
   const { firstName, lastName, email, password, terms } = req.body;
-  console.log(req.body);
 
   // Validate the request body
   if (!firstName || !lastName || !email || !password || !terms) {
@@ -37,27 +37,28 @@ const userRegistration = async (req: Request, res: Response) => {
 // Login User
 const userLogin = async (req: Request, res: Response) => {
   const { email, password } = req.body;
-
   // Validate the request body
   if (!email || !password) {
     return res.status(400).send("Email and password are required");
   }
-
   try {
     // Find the user by email
     const user = await User.findOne({ email });
-    console.log("user", user);
     if (!user) {
       return res.status(400).send("Invalid email or password");
     }
-
     // Compare the password
     const isMatch = await user.matchPassword(password);
     if (!isMatch) {
       return res.status(400).send("Invalid email or password");
     }
 
-    res.status(200).send("Login successful");
+    res.status(201).json({
+      _id: user._id,
+      email: user.email,
+      token: generateToken(user._id),
+      message: "Logged in successfully",
+    });
   } catch (error) {
     res.status(500).send("Internal server error");
   }

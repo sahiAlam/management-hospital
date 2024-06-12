@@ -4,10 +4,14 @@ import { fetchDoctorsStart } from "@/redux/slices/doctors.slice";
 import { Container, Grid, Typography, Pagination, Stack } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import DoctorCard from "../components/Cards/DoctorCard";
+import { RootState } from "@/redux/store";
+import CardSkeleton from "../components/Skeletons/CardSkeleton";
 
 const DoctorsComponent = () => {
   const dispatch = useDispatch();
-  const { doctors, loading } = useSelector((state: any) => state?.doctors);
+  const { doctors, loading } = useSelector(
+    (state: RootState) => state?.doctors
+  );
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -31,7 +35,7 @@ const DoctorsComponent = () => {
 
   // loading state
   if (loading) {
-    return <Typography variant="h1">Loading...</Typography>;
+    return <CardSkeleton />;
   }
 
   return (

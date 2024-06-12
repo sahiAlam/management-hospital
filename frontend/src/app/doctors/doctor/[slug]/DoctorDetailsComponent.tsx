@@ -25,8 +25,8 @@ const DoctorDetailsComponent = () => {
               p={4}
               sx={{
                 border: "1px solid #20A6A2",
-                boxShadow:
-                  "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+                background: "#fff",
+                boxShadow: "0 1px 2px 0 rgba(0,0,0,0.2)",
                 borderRadius: "10px",
               }}
             >
@@ -51,7 +51,7 @@ const DoctorDetailsComponent = () => {
               </Stack>
 
               <Box mt={4}>
-                <Link href="/appointment">
+                <Link href={`/appointment`}>
                   <Button
                     disableRipple
                     size="large"
@@ -65,6 +65,8 @@ const DoctorDetailsComponent = () => {
                         "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
                       "&:hover": {
                         backgroundColor: "#20A6A2",
+                        transition: "all 0.1s ease-in-out",
+                        transform: "scale(1.05)",
                       },
                     }}
                   >
