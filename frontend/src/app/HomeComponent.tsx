@@ -27,7 +27,7 @@ const HomeComponent = () => {
         <Typography variant="h1">
           Empowering Health Choices for a Vibrant Life Your Trusted..
         </Typography>
-        <Typography sx={{ mt: 2 }}>
+        <Typography variant="subtitle1" sx={{ mt: 2 }}>
           Meet careConsult, your partner in healthcare management. Book
           appointments, get reminders, and stay on top of your health
           effortlessly. Start your health journey today.

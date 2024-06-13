@@ -67,7 +67,6 @@ const DoctorsComponent = () => {
             page={currentPage}
             onChange={handlePageChange}
             color="primary"
-            variant="outlined"
             size="medium"
             shape="rounded"
           />

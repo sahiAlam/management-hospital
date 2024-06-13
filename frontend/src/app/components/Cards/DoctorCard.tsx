@@ -25,8 +25,8 @@ const DoctorCard = ({ doctor }: any) => {
         <CardMedia
           component="img"
           alt="green iguana"
-          height="234"
-          image="assets/placeholder_image.webp"
+          height="220"
+          image="assets/doctor.jpg"
         />
         <CardContent>
           <Typography gutterBottom variant="h4">
@@ -55,7 +55,7 @@ const DoctorCard = ({ doctor }: any) => {
           <Link
             href={`doctors/doctor/${doctor?.id}`}
             onClick={() => handleGetDoctorDetails(doctor)}
-            style={{ fontWeight: "bold" }}
+            style={{ fontWeight: "bold", color: "#20A6A2" }}
           >
             Learn More
           </Link>
