@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
+    middleware: true,
     fontLoaders: [
       {
         loader: "@next/font/google",
