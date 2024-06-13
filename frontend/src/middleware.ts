@@ -28,5 +28,5 @@ export function middleware(request: { url: string | URL | undefined }) {
 }
 
 export const config = {
-  matcher: ["/doctors"],
+  matcher: ["/appointment"],
 };

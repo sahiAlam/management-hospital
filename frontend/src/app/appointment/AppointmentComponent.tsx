@@ -6,6 +6,7 @@ import { formatTimestamp } from "@/app/utils/formatTimestamp";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import { useEffect } from "react";
 
 interface CalendlyEmbedProps {
   url: string;
@@ -15,8 +16,6 @@ interface CalendlyEmbedProps {
 const AppointmentComponent = ({ credential }: any) => {
   const router = useRouter();
   const { currentDoctor } = useSelector((state: RootState) => state?.doctors);
-  console.log("currentDoctor", currentDoctor);
-
   const fetchEventDetails = async (eventUri: any) => {
     const uuid = eventUri.split("/").pop();
 
@@ -43,6 +42,14 @@ const AppointmentComponent = ({ credential }: any) => {
       }, 3000);
     },
   });
+
+  // redirecting
+  const user = localStorage.getItem("userInfo");
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    }
+  }, []);
 
   return (
     <>

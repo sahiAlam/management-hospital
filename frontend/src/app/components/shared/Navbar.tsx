@@ -26,8 +26,6 @@ const NavBar = () => {
   const user = localStorage.getItem("userInfo");
   const authInfo = useSelector((state: RootState) => state.auth.userInfo);
 
-  console.log("authInfo", authInfo);
-
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -107,63 +105,40 @@ const NavBar = () => {
             </Link>
           </Typography>
 
-          {user ? (
-            <>
-              <Stack
-                direction={"row"}
-                alignItems={"center"}
-                gap={1.5}
-                sx={{ flexGrow: 0, marginLeft: "auto" }}
+          {user && (
+            <Stack
+              direction={"row"}
+              alignItems={"center"}
+              gap={1.5}
+              sx={{ flexGrow: 0, marginLeft: "auto" }}
+            >
+              <Typography>Hi, {authInfo?.email}</Typography>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt={authInfo?.email} />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
               >
-                <Typography>Hi, {authInfo?.email}</Typography>
-                <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt={authInfo?.email} />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: "45px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  <MenuItem onClick={handleLogoutUser}>
-                    <Typography textAlign="center">Logout</Typography>
-                  </MenuItem>
-                </Menu>
-              </Stack>
-            </>
-          ) : (
-            <>
-              <Box sx={{ flexGrow: 0, marginLeft: "auto" }}>
-                <Button
-                  sx={{
-                    background: "#fff",
-                    fontSize: "15px",
-                    textTransform: "capitalize",
-                    padding: "7px 20px",
-                    "&:hover": {
-                      backgroundColor: "#fff",
-                      color: "rgba(32, 166, 162, 1)",
-                      transform: "scale(1.05)",
-                      transition: "transform 0.3s ease",
-                    },
-                  }}
-                >
-                  <Link href="/login">Login</Link>
-                </Button>
-              </Box>
-            </>
+                <MenuItem onClick={handleLogoutUser}>
+                  <Typography textAlign="center">Logout</Typography>
+                </MenuItem>
+              </Menu>
+            </Stack>
           )}
         </Toolbar>
       </Container>

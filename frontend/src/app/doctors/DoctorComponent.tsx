@@ -6,8 +6,18 @@ import { useDispatch, useSelector } from "react-redux";
 import DoctorCard from "../components/Cards/DoctorCard";
 import { RootState } from "@/redux/store";
 import CardSkeleton from "../components/Skeletons/CardSkeleton";
+import { useRouter } from "next/navigation";
 
 const DoctorsComponent = () => {
+  const router = useRouter();
+  // route validating
+  const user = localStorage.getItem("userInfo");
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    }
+  }, []);
+
   const dispatch = useDispatch();
   const { doctors, loading } = useSelector(
     (state: RootState) => state?.doctors
