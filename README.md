@@ -35,7 +35,17 @@ This doctor appointment scheduling application, built with the MERN stack (Mongo
 6. Finally Schedule your appointment booking.
 7. Check your inbox for a confirmation email containing appointment details like event date/time etc.
 
+**Landing Page**
+![4](https://github.com/sahiAlam/management-hospital/assets/88125879/32ce13d8-eb49-45b2-855b-d592b1bdaebb)
 
+**Login**
+![6](https://github.com/sahiAlam/management-hospital/assets/88125879/87079e57-5207-4503-a56b-5e96e49b3fac)
+
+**Doctors Listing**
+![1](https://github.com/sahiAlam/management-hospital/assets/88125879/dfd551ee-a9c7-4a12-91fd-29148eb0938c)
+
+**Booking an Appointment**
+![3](https://github.com/sahiAlam/management-hospital/assets/88125879/f98e0b87-242c-497f-aa7a-90fe42294b9f)
 
 ## Future Enhancements
 
