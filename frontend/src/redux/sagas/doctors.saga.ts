@@ -5,10 +5,7 @@ import {
   fetchDoctorsSuccess,
 } from "@/redux/slices/doctors.slice";
 import { fetchDataFromApi } from "../services/apiClients/fetchDataFromApi";
-import { DOCTORS_API_BASE_URL } from "@/redux/services/apiEndpoints";
-
-const API_KEY = "$2a$10$.Rr4wfVHtGqq9ApKnYvP9.gA.jbsdJ/w45RWVnPELJy71iSifSgOW";
-// const API_KEY = process.env.DOCTOR_API_MASTER_KEY;
+import { DOCTORS_API_BASE_URL, API_KEY } from "@/redux/services/apiEndpoints";
 
 const credential = { DOCTORS_API_BASE_URL, API_KEY };
 // Worker functions for users saga

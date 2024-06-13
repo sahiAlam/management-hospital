@@ -6,11 +6,11 @@ const getHomeRoute = (req: Request, res: Response) => {
   res.send("Api Nicely Working");
 };
 
-// Registration User
+/****** Registration User *******/
 const userRegistration = async (req: Request, res: Response) => {
   const { firstName, lastName, email, password, terms } = req.body;
 
-  // Validate the request body
+  // Validating the request body
   if (!firstName || !lastName || !email || !password || !terms) {
     return res.status(400).send("All fields are required");
   }
@@ -20,10 +20,10 @@ const userRegistration = async (req: Request, res: Response) => {
     if (existingUser) {
       return res.status(400).send({ message: "Email already exists" });
     }
-    // Create a new user
+    // Creating a new user
     const newUser = new User({ firstName, lastName, email, password, terms });
 
-    // Save the user to the database
+    // Saving the user to the database
     await newUser.save();
 
     res.status(201).send("User created successfully");
@@ -38,20 +38,20 @@ const userRegistration = async (req: Request, res: Response) => {
   }
 };
 
-// Login User
+/************ Login User *********/
 const userLogin = async (req: Request, res: Response) => {
   const { email, password } = req.body;
-  // Validate the request body
+  // Validating the request body
   if (!email || !password) {
     return res.status(400).send("Email and password are required");
   }
   try {
-    // Find the user by email
+    // Finding the user by email
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).send("Invalid email or password");
     }
-    // Compare the password
+    // Comparing the password
     const isMatch = await user.matchPassword(password);
     if (!isMatch) {
       return res.status(400).send("Invalid email or password");

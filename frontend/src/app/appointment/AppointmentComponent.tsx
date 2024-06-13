@@ -17,7 +17,7 @@ const AppointmentComponent = ({ credential }: any) => {
   const router = useRouter();
   const { currentDoctor } = useSelector((state: RootState) => state?.doctors);
   const fetchEventDetails = async (eventUri: any) => {
-    const uuid = eventUri.split("/").pop();
+    // const uuid = eventUri.split("/").pop();
 
     try {
       const response = await axios.get(eventUri, {
