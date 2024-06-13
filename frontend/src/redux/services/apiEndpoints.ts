@@ -3,6 +3,8 @@ export const BASE_URL = "http://localhost:8000";
 
 export const DOCTORS_API_BASE_URL =
   "https://api.jsonbin.io/v3/b/66658046acd3cb34a854eb3c";
+export const API_KEY =
+  "$2a$10$.Rr4wfVHtGqq9ApKnYvP9.gA.jbsdJ/w45RWVnPELJy71iSifSgOW";
 
 // Auth Apis Endpoints
 export const AUTH_ENDPOINTS = {

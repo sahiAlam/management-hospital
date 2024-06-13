@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose";
 import bcrypt from "bcrypt";
 
-// Define an interface for the User model
+// Defining an interface for the User model
 interface IUser extends Document {
   firstName: string;
   lastName: string;
@@ -11,7 +11,7 @@ interface IUser extends Document {
   matchPassword: (enteredPassword: string) => Promise<boolean>;
 }
 
-// Create the schema
+// Creating the schema
 const UserSchema: Schema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
@@ -20,7 +20,7 @@ const UserSchema: Schema = new Schema({
   terms: { type: Boolean, required: true },
 });
 
-// Hash the password before saving the user model
+// Hashing the password before saving the user model
 UserSchema.pre<IUser>("save", async function (next) {
   if (!this.isModified("password")) {
     return next();
@@ -42,6 +42,6 @@ UserSchema.methods.matchPassword = async function (
   return bcrypt.compare(enteredPassword, this.password);
 };
 
-// Create and export the model
+// Creating and exporting the model
 const User = mongoose.model<IUser>("User", UserSchema);
 export default User;
